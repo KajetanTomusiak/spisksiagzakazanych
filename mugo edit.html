@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-NH152ZR3J5&amp;l=dataLayer&amp;cx=c"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script src="https://connect.facebook.net/signals/config/470115814237627?v=2.9.94&amp;r=stable" async=""></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-MBP469X"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MBP469X');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUGO | Spis Ksiąg Zakazanych</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700&amp;display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-family: "Inter", Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg {
+            position: fixed;
+            z-index: -1;
+            height: 200%;
+            width: 200%;
+            top: -50%;
+            left: -50%;
+            transform: translateZ(0);
+            background-color: #000;
+            display: block;
+        }
+
+            .bg img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 50%;
+                min-width: 55%;
+                min-height: 55%;
+                margin: auto;
+                transform: translate3d(-50%, 0, 0);
+                max-width: none;
+                filter: blur(30px);
+                opacity: 0.7;
+            }
+
+        main {
+            width: 320px;
+            margin: auto;
+            background-color: white;
+        }
+
+        .headImage {
+            width: 100%;
+            position: relative;
+        }
+
+            .headImage img {
+                width: 100%;
+                height: 320px;
+            }
+
+            .headImage .headText {
+                padding: 20px;
+                background: linear-gradient(0deg, white 0%, white 60%, rgba(0, 0, 0, 0) 100%);
+                position: absolute;
+                bottom: -30px;
+                width: 100%;
+            }
+
+                .headImage .headText p {
+                    margin: 0;
+                    font-size: 18px;
+                }
+
+                .headImage .headText .artist {
+                    font-weight: 500;
+                    font-size: 16px;
+                }
+
+                .headImage .headText .title {
+                    font-weight: 700;
+                    font-size: 32px;
+                }
+
+        .tracklist {
+            padding: 0px 20px;
+            max-height: calc(100vh - 325px);
+            overflow: auto;
+        }
+
+        .content-tracklist-track {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+            .content-tracklist-track:not(:first-of-type) {
+                border-top: 1px solid rgba(0, 0, 0, 0.15);
+            }
+
+            .content-tracklist-track svg {
+                margin: 0 25px 0 0;
+                cursor: pointer;
+            }
+
+            .content-tracklist-track .content-tracklist-track-info {
+                display: flex;
+                flex-direction: column;
+                padding: 20px 0;
+            }
+
+            .content-tracklist-track .content-tracklist-title {
+                font-size: 17px;
+                color: rgba(0, 0, 0, 0.8);
+            }
+
+            .content-tracklist-track .content-tracklist-sub {
+                font-size: 13px;
+                color: rgba(0, 0, 0, 0.6);
+            }
+
+        footer {
+            background: #181818;
+            padding: 20px 20px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .social-links {
+            width: 120px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .loadingTrack {
+            width: 31px;
+            height: 31px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            opacity: 0.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 25px 3px 0;
+        }
+
+            .loadingTrack > div {
+                width: 50%;
+                height: 50%;
+                border-radius: 50%;
+                border: 3px solid rgba(0, 0, 0, 0.5);
+                border-left-color: rgba(0, 0, 0, 0.7);
+                animation: spin 1s linear infinite;
+            }
+    </style>
+    <link rel="icon" type="image/png" href="/icons/fav.png">
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '470115814237627');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=470115814237627&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+<meta http-equiv="origin-trial" content="A751Xsk4ZW3DVQ8WZng2Dk5s3YzAyqncTzgv+VaE6wavgTY0QHkDvUTET1o7HanhuJO8lgv1Vvc88Ij78W1FIAAAAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><script type="text/javascript" async="" src="https://googleads.g.doubleclick.net/pagead/viewthroughconversion/10963573254/?random=1674651869034&amp;cv=11&amp;fst=1674651869034&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=2wg1n0&amp;u_w=1366&amp;u_h=768&amp;hn=www.googleadservices.com&amp;frm=0&amp;url=https%3A%2F%2Fmugo.pl%2FMusicProduct%2Fspisksiagzakazanych&amp;tiba=MUGO%20%7C%20Spis%20Ksi%C4%85g%20Zakazanych&amp;auid=1556845005.1674651869&amp;uaa=x86&amp;uab=64&amp;uafvl=Not_A%2520Brand%3B99.0.0.0%7CGoogle%2520Chrome%3B109.0.5414.119%7CChromium%3B109.0.5414.119&amp;uamb=0&amp;uap=Windows&amp;uapv=8.0.0&amp;uaw=0&amp;rfmt=3&amp;fmt=4"></script></head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MBP469X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="bg">
+        <img src="https://fmmtp.pl/covers/full/d0df37d6-6cc7-4280-9469-c5651d41aab1.png">
+    </div>
+    <main>
+        <div class="headImage">
+            <img src="https://fmmtp.pl/covers/full/d0df37d6-6cc7-4280-9469-c5651d41aab1.png">
+            
+        </div>
+        <div class="tracklist">
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/00b43d14-3b69-4a33-8cea-817ceef57a87.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">1. slytherin</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/75ec45ce-5df2-4ddc-9b2a-37717bf2da60.mp3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn pause">
+            <g id="PauseIcon" transform="translate(0.5 0.5)">
+                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" stroke-width="1" opacity="0.5"></path>
+                <rect id="Rectangle_648" data-name="Rectangle 648" width="3" height="13" rx="1.5" transform="translate(10.5 8.5)" fill="rgba(0,0,0,0.7)"></rect>
+                <rect id="Rectangle_649" data-name="Rectangle 649" width="3" height="13" rx="1.5" transform="translate(16.5 8.5)" fill="rgba(0,0,0,0.7)"></rect>
+            </g>
+        </svg>
+        </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">2. nosze polar</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/363d40a7-a2dc-4d40-852f-c7420362f456.mp3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+            <g id="Icon" transform="translate(0.5 0.5)">
+              <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+            <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+            </g>
+        </svg>
+        </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">3. kłócę się z bogiem</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/f3e9d706-e712-42d4-b5c4-0048a0221c59.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">4. off-white</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/103899ea-3b05-428d-a6f8-1a097285769d.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">5. serowy cheetos (czyj to merc?)</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/PLC062251882.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">6. kaszmir</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/c5312f14-edba-4893-b649-95d9a619fd1e.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">7. qq (cv do wytwórni)</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/85f00281-9906-496a-b195-b87da9162c0c.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">8. europa</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/0e9deb6d-405a-4695-9f39-a88668d8628e.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">9. zasięg</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/d0e2b9f7-3807-4175-96f9-55716d2e9294.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">10. expecto patronum</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/60566478-e619-4118-85fb-81345b4b0bbb.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">11. będę na muralu</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/4e468513-b229-4ccb-a29f-e65538c14e65.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">12. halo?</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+                <div class="content-tracklist-track">
+                    <div class="playBtnWrapper" data-path="https://fmmtp.pl/tracks/mp3/down/be381aa6-701e-4071-8816-fc16369d4696.mp3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+                            <g id="Icon" transform="translate(0.5 0.5)">
+                                <path id="Background" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(0,0,0,0.2)" stroke="rgba(0,0,0,0.7)" opacity="0.5" stroke-width="1"></path>
+                                <path id="Icon-2" data-name="Icon" d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z" transform="translate(21 10)" fill="#000" opacity="0.7"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="content-tracklist-track-info">
+                        <span class="content-tracklist-title">13. outro</span>
+                        <span class="content-tracklist-sub">buxie x dazzy</span>
+                        
+                    </div>
+                </div>
+
+        </div>
+        
+    </main>
+    <script>
+  document.querySelectorAll('.playBtn').forEach((btn) => {
+    var trackBtn = btn;
+    const wrapper = btn.parentNode;
+    var path = wrapper.dataset.path;
+    if (!path) return;
+    var audio;
+    wrapper.children[0].addEventListener('click', play);
+
+    async function play() {
+       
+        wrapper.innerHTML = `
+          <div class="loadingTrack">
+              <div class="spinningCircleLadingTrack"></div>
+          </div>
+          `;
+        audio = await new Audio(path);
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent))
+            audio.autoplay = true;
+        audio.volume = 0.3;
+
+        audio.addEventListener('loadeddata', () => {
+            audio.play();
+            wrapper.children[0].removeEventListener('click', play);
+            createPasue();
+        });
+            
+    }
+
+    function pause() {
+      audio.pause();
+      wrapper.children[0].removeEventListener('click', pause);
+      createPlay();
+    }
+
+    function createPasue() {
+      wrapper.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn pause">
+            <g id="PauseIcon" transform="translate(0.5 0.5)">
+                <path
+                id="Background"
+                d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z"
+                fill="rgba(0,0,0,0.2)"
+                stroke="rgba(0,0,0,0.7)"
+                stroke-width="1"
+                opacity="0.5"
+                />
+                <rect id="Rectangle_648" data-name="Rectangle 648" width="3" height="13" rx="1.5" transform="translate(10.5 8.5)" fill="rgba(0,0,0,0.7)" />
+                <rect id="Rectangle_649" data-name="Rectangle 649" width="3" height="13" rx="1.5" transform="translate(16.5 8.5)" fill="rgba(0,0,0,0.7)" />
+            </g>
+        </svg>
+        `;
+        wrapper.children[0].addEventListener('click', pause);
+
+    }
+    function createPlay() {
+      wrapper.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" class="playBtn">
+            <g id="Icon" transform="translate(0.5 0.5)">
+              <path
+              id="Background"
+              d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z"
+              fill="rgba(0,0,0,0.2)"
+              stroke="rgba(0,0,0,0.7)"
+              opacity="0.5"
+              stroke-width="1"
+            ></path>
+            <path
+              id="Icon-2"
+              data-name="Icon"
+              d="M-10,.574A.625.625,0,0,1-9.053.085L-.3,5.012a.55.55,0,0,1,0,.977L-3.347,7.7l-5.706,3.211A.625.625,0,0,1-10,10.427Z"
+              transform="translate(21 10)"
+              fill="#000"
+              opacity="0.7"
+            ></path>
+            </g>
+        </svg>
+        `;
+      wrapper.children[0].addEventListener('click', play);
+    }
+  });
+    </script>
+
+
+</body></html>
